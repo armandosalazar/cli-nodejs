@@ -1,6 +1,7 @@
 const { program } = require('commander');
 const inquirer = require('inquirer');
 const notifier = require('node-notifier');
+const { saveTask } = require('./controllers/task.controller');
 
 program
     .name('cli-nodejs')
@@ -29,7 +30,8 @@ program
                         message: 'Enter task description:'
                     }
                 ]);
-                console.log(answers);
+
+                saveTask(answers);
             }
         } catch (error) {
             console.log(error);
