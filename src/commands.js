@@ -12,26 +12,27 @@ program
     .description('Manage tasks')
     .option('-s, --save', 'Save task')
     .option('-l, --list', 'List all tasks')
-    .action((options) => {
-        if (Object.keys(options).length == 0) {
-            console.log('Use --help to see available options');
-        } else {
+    .action(async (options) => {
+        if (Object.keys(options).length == 0)
+            program.help();
+        try {
             if (options.save) {
-                inquirer
-                    .prompt([
-                        {
-                            type: 'input',
-                            name: 'task',
-                            message: 'Enter task:',
-                        },
-                    ])
-                    .then((answers) => {
-                        console.log(answers);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
+                const answers = await inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'title',
+                        message: 'Enter task title:'
+                    },
+                    {
+                        type: 'input',
+                        name: 'description',
+                        message: 'Enter task description:'
+                    }
+                ]);
+                console.log(answers);
             }
+        } catch (error) {
+            console.log(error);
         }
     });
 
