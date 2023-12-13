@@ -1,0 +1,24 @@
+{
+  "name": "cli-nodejs",
+  "version": "1.0.0",
+  "description": "CLI with nodejs and mongodb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/armandosalazar/cli-nodejs.git"
+  },
+  "keywords": [
+    "CLI",
+    "NodeJS",
+    "MongoDB"
+  ],
+  "author": "Armando Salazar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/armandosalazar/cli-nodejs/issues"
+  },
+  "homepage": "https://github.com/armandosalazar/cli-nodejs#readme"
+}
