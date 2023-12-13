@@ -1,2 +1,7 @@
 #!/usr/local/bin/node
-const commands = require('./src/commands');
+
+require('./src/commands');
+
+(async () => {
+    require('./src/db')();
+})();
