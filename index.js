@@ -1,3 +1,2 @@
-#!/usr/bin/node
-
-console.log('Hi!');
+#!/usr/local/bin/node
+const commands = require('./src/commands');

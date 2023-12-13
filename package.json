@@ -20,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/armandosalazar/cli-nodejs/issues"
   },
-  "homepage": "https://github.com/armandosalazar/cli-nodejs#readme"
+  "homepage": "https://github.com/armandosalazar/cli-nodejs#readme",
+  "dependencies": {
+    "commander": "^11.1.0",
+    "inquirer": "^8.2.6",
+    "node-notifier": "^10.0.1"
+  }
 }
