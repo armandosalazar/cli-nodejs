@@ -1,19 +1,45 @@
 const Task = require('../models/task.model');
 const { connection } = require('mongoose');
-const notifier = require('node-notifier');
 
 async function saveTask(task) {
-    try {
-        const result = await Task.create(task);
-        if (result) {
-            console.log('\n[*] Task saved successfully');
-        }
-    } catch (error) {
-        console.log(error);
+  try {
+    const result = await Task.create(task);
+    if (result) {
+      console.log('\n[*] Task saved successfully');
     }
-    await connection.close();
+  } catch (error) {
+    console.log(error);
+  }
+  await connection.close();
+}
+
+async function listTasks() {
+  try {
+    const tasks = await Task.find().lean();
+    console.table(tasks.map(task => ({
+      id: task._id.toString(),
+      title: task.title,
+      description: task.description
+    })));
+  } catch (error) {
+    console.log(error);
+  }
+  await connection.close();
+}
+
+async function deleteTask(id) {
+  try {
+    const result = await Task.findByIdAndDelete(id);
+    if (result) {
+      console.log('\n[*] Task deleted successfully');
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 module.exports = {
-    saveTask
+  saveTask,
+  listTasks,
+  deleteTask
 };
