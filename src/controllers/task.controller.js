@@ -27,15 +27,17 @@ async function listTasks() {
   await connection.close();
 }
 
-async function deleteTask(id) {
+async function deleteTask(_id) {
   try {
-    const result = await Task.findByIdAndDelete(id);
+    const result = await Task.findByIdAndDelete(_id.id);
     if (result) {
       console.log('\n[*] Task deleted successfully');
     }
   } catch (error) {
     console.log(error);
   }
+
+  await connection.close();
 }
 
 module.exports = {
