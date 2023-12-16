@@ -1,6 +1,6 @@
 const { program } = require('commander');
 const inquirer = require('inquirer');
-const { saveTask, listTasks, deleteTask } = require('./controllers/task.controller');
+const { saveTask, updateTask, deleteTask, listTasks } = require('./controllers/task.controller');
 
 program
   .name('cli-nodejs')
@@ -9,10 +9,12 @@ program
 
 program
   .command('task')
+  .alias('t')
   .description('Manage tasks')
   .option('-s, --save', 'Save task')
-  .option('-l, --list', 'List all tasks')
+  .option('-u, --update', 'Update a task')
   .option('-d, --delete', 'Delete a task')
+  .option('-l, --list', 'List all tasks')
   .action(async (options) => {
     if (Object.keys(options).length == 0)
       program.help();
@@ -40,13 +42,34 @@ program
         const answers = await inquirer.prompt([
           {
             type: 'input',
-            name: 'id',
+            name: '_id',
             message: 'Enter task id:'
           }
         ]);
 
-        await deleteTask(answers);
+        await deleteTask(answers._id);
 
+      }
+      if (options.update) {
+        const answers = await inquirer.prompt([
+          {
+            type: 'input',
+            name: '_id',
+            message: 'Enter task id:'
+          },
+          {
+            type: 'input',
+            name: 'title',
+            message: 'Enter task title:'
+          },
+          {
+            type: 'input',
+            name: 'description',
+            message: 'Enter task description:'
+          }
+        ]);
+
+        await updateTask(answers);
       }
     } catch (error) {
       console.log(error);

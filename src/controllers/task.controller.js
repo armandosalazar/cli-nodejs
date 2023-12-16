@@ -13,6 +13,36 @@ async function saveTask(task) {
   await connection.close();
 }
 
+async function deleteTask(_id) {
+  try {
+    const result = await Task.findByIdAndDelete(_id);
+    if (result) {
+      console.log('\n[*] Task deleted successfully');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  await connection.close();
+}
+
+async function updateTask(task) {
+  try {
+    const result = await Task.findByIdAndUpdate(task._id, {
+      title: task.title,
+      description: task.description
+    });
+
+    if (result) {
+      console.log('\n[*] Task updated successfully');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  await connection.close();
+}
+
 async function listTasks() {
   try {
     const tasks = await Task.find().lean();
@@ -27,21 +57,11 @@ async function listTasks() {
   await connection.close();
 }
 
-async function deleteTask(_id) {
-  try {
-    const result = await Task.findByIdAndDelete(_id.id);
-    if (result) {
-      console.log('\n[*] Task deleted successfully');
-    }
-  } catch (error) {
-    console.log(error);
-  }
 
-  await connection.close();
-}
 
 module.exports = {
   saveTask,
+  updateTask,
+  deleteTask,
   listTasks,
-  deleteTask
 };
