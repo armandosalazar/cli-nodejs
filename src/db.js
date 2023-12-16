@@ -1,4 +1,5 @@
 const { connect } = require('mongoose');
+const process = require('process');
 
 module.exports = async () => {
   try {
@@ -7,4 +8,4 @@ module.exports = async () => {
     console.log(error);
     process.exit(1);
   }
-}
+};
