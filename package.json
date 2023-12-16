@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "CLI with nodejs and mongodb",
   "main": "index.js",
-  "bin": "./index.js",
+  "bin": {
+    "cli-nodejs": "./index.js"
+  },
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

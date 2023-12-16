@@ -10,3 +10,14 @@ Y despues reiniciar el servicio
 sudo systemctl restart mongodb
 mongosh --host 192.168.128.128
 ```
+
+Correr el binario
+```bash
+npm link
+cli-nodejs task -l
+```
+
+Desinstalar el binario
+```bash
+npm unlink cli-nodejs
+```
