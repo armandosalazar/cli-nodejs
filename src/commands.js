@@ -1,6 +1,12 @@
 const { program } = require('commander');
 const inquirer = require('inquirer');
-const { saveTask, updateTask, deleteTask, findTask, listTasks } = require('./controllers/task.controller');
+const {
+  saveTask,
+  updateTask,
+  deleteTask,
+  findTask,
+  listTasks,
+} = require('./controllers/task.controller');
 
 program
   .name('cli-nodejs')
@@ -17,21 +23,20 @@ program
   .option('-l, --list', 'List all tasks')
   .option('-f, --find', 'Find a task')
   .action(async (options) => {
-    if (Object.keys(options).length == 0)
-      program.help();
+    if (Object.keys(options).length == 0) program.help();
     try {
       if (options.save) {
         const answers = await inquirer.prompt([
           {
             type: 'input',
             name: 'title',
-            message: 'Enter task title:'
+            message: 'Enter task title:',
           },
           {
             type: 'input',
             name: 'description',
-            message: 'Enter task description:'
-          }
+            message: 'Enter task description:',
+          },
         ]);
 
         saveTask(answers);
@@ -41,18 +46,18 @@ program
           {
             type: 'input',
             name: '_id',
-            message: 'Enter task id:'
+            message: 'Enter task id:',
           },
           {
             type: 'input',
             name: 'title',
-            message: 'Enter task title:'
+            message: 'Enter task title:',
           },
           {
             type: 'input',
             name: 'description',
-            message: 'Enter task description:'
-          }
+            message: 'Enter task description:',
+          },
         ]);
 
         await updateTask(answers);
@@ -62,20 +67,19 @@ program
           {
             type: 'input',
             name: '_id',
-            message: 'Enter task id:'
-          }
+            message: 'Enter task id:',
+          },
         ]);
 
         await deleteTask(answers._id);
-
       }
       if (options.find) {
         const answers = await inquirer.prompt([
           {
             type: 'input',
             name: 'task',
-            message: 'Enter task:'
-          }
+            message: 'Enter task:',
+          },
         ]);
 
         await findTask(answers.task);

@@ -17,7 +17,7 @@ async function updateTask(task) {
   try {
     const result = await Task.findByIdAndUpdate(task._id, {
       title: task.title,
-      description: task.description
+      description: task.description,
     });
 
     if (result) {
@@ -46,18 +46,16 @@ async function deleteTask(_id) {
 async function findTask(task) {
   try {
     const result = await Task.find({
-      $or: [
-        { title: task },
-        { description: task }
-      ]
+      $or: [{ title: task }, { description: task }],
     }).lean();
 
-    console.table(result.map(task => ({
-      id: task._id.toString(),
-      title: task.title,
-      description: task.description
-    })));
-
+    console.table(
+      result.map((task) => ({
+        id: task._id.toString(),
+        title: task.title,
+        description: task.description,
+      })),
+    );
   } catch (error) {
     console.log(error);
   }
@@ -66,18 +64,18 @@ async function findTask(task) {
 async function listTasks() {
   try {
     const tasks = await Task.find().lean();
-    console.table(tasks.map(task => ({
-      id: task._id.toString(),
-      title: task.title,
-      description: task.description
-    })));
+    console.table(
+      tasks.map((task) => ({
+        id: task._id.toString(),
+        title: task.title,
+        description: task.description,
+      })),
+    );
   } catch (error) {
     console.log(error);
   }
   await connection.close();
 }
-
-
 
 module.exports = {
   saveTask,
