@@ -45,9 +45,11 @@ async function deleteTask(_id) {
 
 async function findTask(task) {
   try {
+    const exp = new RegExp(task, 'i');
+
     const result = await Task.find({
-      $or: [{ title: task }, { description: task }],
-    }).lean();
+      $or: [{ title: exp }, { description: exp }],
+    });
 
     console.table(
       result.map((task) => ({
@@ -59,6 +61,8 @@ async function findTask(task) {
   } catch (error) {
     console.log(error);
   }
+
+  connection.close();
 }
 
 async function listTasks() {
